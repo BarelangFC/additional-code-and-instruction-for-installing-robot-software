@@ -206,7 +206,7 @@ void YoloObjectDetector::init()
     detectionImageTopicName, detection_image_publisher_qos);
 
   // tambahan
-  barelangPublisher_ = this->create_publisher<std_msgs::msg::Int32MultiArray>("robot_vision_1",10);
+  barelangPublisher_ = this->create_publisher<std_msgs::msg::Int32MultiArray>("robot_vision",10);
 
   // Action servers.
   std::string checkForObjectsActionName;
