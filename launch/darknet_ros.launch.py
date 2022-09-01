@@ -43,6 +43,7 @@ def generate_launch_description():
     executable='darknet_ros',
     name='darknet_ros',
     output='screen',
+    namespace = 'robot_1',
     parameters=[ros_param_file, network_param_file,
       {
         "config_path": yolo_config_path, 

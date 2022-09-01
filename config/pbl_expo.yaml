@@ -1,20 +1,21 @@
-darknet_ros:
-  ros__parameters:
-    yolo_model:
-      config_file:
-        name: pbl_expo.cfg
-      weight_file:
-        name: pbl_expo_best.weights
-      threshold:
-        value: 0.3
-      window_name: YOLO V7
-      detection_classes:
-        names:
-          - ball
-          - goal
-          - goal_Bpole
-          - robot
-          - pinalty_point
-          - x_cross
-          - goal_Tpole
+robot_1:
+  darknet_ros:
+    ros__parameters:
+      yolo_model:
+        config_file:
+          name: pbl_expo.cfg
+        weight_file:
+          name: pbl_expo_best.weights
+        threshold:
+          value: 0.3
+        window_name: YOLO V7
+        detection_classes:
+          names:
+            - ball
+            - goal
+            - goal_Bpole
+            - robot
+            - pinalty_point
+            - x_cross
+            - goal_Tpole
 
