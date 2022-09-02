@@ -43,23 +43,24 @@ def generate_launch_description():
     executable='darknet_ros',
     name='darknet_ros',
     output='screen',
-    namespace = 'robot_1',
     parameters=[ros_param_file, network_param_file,
       {
         "config_path": yolo_config_path, 
         "weights_path": yolo_weights_path,
       },
-    ])
+    ],
+    namespace = 'robot_1')
 
   usb_cam_node=Node(
-        package = 'usb_cam',
-        name = 'usb_cam',
-        executable = 'usb_cam_node_exe',
-        parameters=[
-          {"framerate": 30.0},
-          {"image_width": 640},
-          {"image_height": 480}
-        ]
+      package = 'usb_cam',
+      name = 'usb_cam',
+      executable = 'usb_cam_node_exe',
+      parameters=[
+        {"framerate": 30.0},
+        {"image_width": 640},
+        {"image_height": 480}
+      ],
+      namespace = 'robot_1'
     )
 
   ld = LaunchDescription()
