@@ -206,7 +206,7 @@ void YoloObjectDetector::init()
     detectionImageTopicName, detection_image_publisher_qos);
 
   // tambahan
-  barelangPublisher_ = this->create_publisher<std_msgs::msg::Int32MultiArray>("robot_vision",10);
+  barelangPublisher_ = this->create_publisher<std_msgs::msg::Int32MultiArray>("vision",10);
 
   // Action servers.
   std::string checkForObjectsActionName;
@@ -733,18 +733,21 @@ void *YoloObjectDetector::publishInThread()
     boundingBoxesResults_.header.stamp = this->now();
     boundingBoxesResults_.header.frame_id = "detection";
     boundingBoxesResults_.image_header = headerBuff_[(buffIndex_ + 1) % 3];
-    boundingBoxesPublisher_->publish(boundingBoxesResults_);
-
-    //tambahan
-    barelangResults_.data = {ball_x_, ball_y_, goal_x_, goal_y_};
-    barelangPublisher_->publish(barelangResults_);
+    boundingBoxesPublisher_->publish(boundingBoxesResults_);    
   } else {
+    // tambahan
+    ball_x_ = ball_y_ = goal_x_ = goal_y_ = -1;
     darknet_ros_msgs::msg::ObjectCount msg;
     msg.header.stamp = this->now();
     msg.header.frame_id = "detection";
     msg.count = 0;
     objectPublisher_->publish(msg);
   }
+
+  //tambahan
+  barelangResults_.data = {ball_x_, ball_y_, goal_x_, goal_y_};
+  barelangPublisher_->publish(barelangResults_);
+
   if (isCheckingForObjects()) {
     RCLCPP_DEBUG(get_logger(), "[YoloObjectDetector] check for objects in image.");
     auto result = std::make_shared<CheckForObjectsAction::Result>();
@@ -759,9 +762,6 @@ void *YoloObjectDetector::publishInThread()
     rosBoxes_[i].clear();
     rosBoxCounter_[i] = 0;
   }
-
-  // tambahan
-  ball_x_ = ball_y_ = goal_x_ = goal_y_ = -1;
 
   return 0;
 }
