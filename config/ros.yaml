@@ -22,6 +22,35 @@ robot_1:
           queue_size: 1
           latch: true
       image_view:
-        enable_opencv: false
+        enable_opencv: true
         wait_key_delay: 3
         enable_console_output: true
+
+  usb_cam:
+    ros__parameters:
+      video_device: "/dev/video0"
+      framerate: 30.0
+      io_method: "mmap"
+      frame_id: "camera"
+      pixel_format: "yuyv"
+      image_width: 640
+      image_height: 480
+      camera_name: "test_camera"
+      camera_info_url: "package://usb_cam/config/camera_info.yaml"
+      camera_matrix:
+        rows: 3
+        cols: 3
+        data: [613.922284, 0.000000, 326.148685, 0.000000, 616.214744, 227.738922, 0.000000, 0.000000, 1.000000]
+      distortion_model: plumb_bob
+      distortion_coefficients:
+        rows: 1
+        cols: 5
+        data: [0.108975, -0.215163, 0.003257, 0.000561, 0.000000]
+      rectification_matrix:
+        rows: 3
+        cols: 3
+        data: [1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000]
+      projection_matrix:
+        rows: 3
+        cols: 4
+        data: [621.846436, 0.000000, 325.993302, 0.000000, 0.000000, 623.690430, 228.383781, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000]

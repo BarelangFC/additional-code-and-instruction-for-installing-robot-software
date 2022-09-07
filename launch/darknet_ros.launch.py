@@ -55,11 +55,7 @@ def generate_launch_description():
       package = 'usb_cam',
       name = 'usb_cam',
       executable = 'usb_cam_node_exe',
-      parameters=[
-        {"framerate": 30.0},
-        {"image_width": 640},
-        {"image_height": 480}
-      ],
+      parameters=[ros_param_file],
       namespace = 'robot_1'
     )
 
